@@ -4,7 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 export default React.createClass({
     mixins: [PureRenderMixin],
 
-    getPair(entry) {
+    getVotes(entry) {
         if (this.props.tally && this.props.tally.has(entry)) {
             return this.props.tally.get(entry)
         }
@@ -14,14 +14,21 @@ export default React.createClass({
     render() {
         return (
             <div className="results">
-                {this.getPair().map(entry =>
-                    <div key={entry} className="entry">
-                        <h1>{entry}</h1>
-                        <div className="voteCount">
-                            {this.getVotes(entry)}
+                <div className="tally">
+                    {this.getVotes().map(entry =>
+                        <div key={entry} className="entry">
+                            <h1>{entry}</h1>
+                            <div className="voteCount">
+                                {this.getVotes(entry)}
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
+                <div className="management">
+                    <button ref="next" className="next" onClick={this.props.next}>
+                        Next
+                    </button>
+                </div>
             </div>
         )
     }
