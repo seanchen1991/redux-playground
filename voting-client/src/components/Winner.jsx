@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-export default class Winner extends Component {
-    constructor(props) {
-        super(props)
-    }
+export default React.createClass({
+    mixins: [PureRenderMixin],
 
     render() {
         return (
@@ -12,4 +11,4 @@ export default class Winner extends Component {
             </div>
         )
     }
-}
+})
