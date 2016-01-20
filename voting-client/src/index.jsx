@@ -1,18 +1,32 @@
 import React from 'react'
+import reducer from './reducer'
 import ReactDOM from 'react-dom'
 import App from './components/App'
-import Voting from './components/Voting'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import Router, { Route } from 'react-router'
-import Results from './components/Results'
+import { VotingContainer } from './components/Voting'
+import { ResultsContainer } from './components/Results'
 
-const pair = ['Trainspotting', '28 Days Later']
+const store = createStore(reducer)
+store.dispatch({
+    type: 'SET_STATE',
+    state: {
+        vote: {
+            pair: ['Sunshine', '28 Days Later'],
+            tally: {Sunshine: 2}
+        }
+    }
+})
 
 const routes = <Route component={App}>
-    <Route path="/results" component={Results} />
-    <Route path="/" component={Voting} />
+    <Route path="/" component={VotingContainer} />
+    <Route path="/results" component={ResultsContainer} />
 </Route>
 
 ReactDOM.render(
-    <Router>{routes}</Router>
+    <Provider store={store}>
+        <Router>{routes}</Router>
+    </Provider>,
     document.getElementById('app')
 )

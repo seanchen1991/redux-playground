@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { expect } from 'chai'
 import { List } from 'immutable'
 import ReactTestUtils from 'react-addons-test-utils'
-import Voting from '../../src/components/Voting.jsx'
+import { Voting } from '../../src/components/Voting'
 
 const { renderIntoDocument, scryRenderedDOMComponentsWithTag, Simulate } = ReactTestUtils
 

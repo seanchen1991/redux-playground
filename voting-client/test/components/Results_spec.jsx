@@ -2,10 +2,10 @@ import React from 'react'
 import { expect } from 'chai'
 import ReactDOM from 'react-dom'
 import { List, Map } from 'immutable'
-import Results from '../../src/components/Results'
+import { Results } from '../../src/components/Results'
 import ReactTestUtils from 'react-addons-test-utils'
 
-const { renderIntoDocument, scryRenderedDOMComponentsWithTag } = ReactTestUtils
+const { renderIntoDocument, scryRenderedDOMComponentsWithClass, Simulate } = ReactTestUtils
 
 describe('Results', () => {
     it('renders entries with vote counts or zero', () => {
@@ -14,8 +14,8 @@ describe('Results', () => {
         const component = renderIntoDocument(
             <Results pair={pair} tally={tally} />
         )
-        const entries = scryRenderedDOMComponentsWithTag(component, 'entry')
-        const [trains, days] = entries.map(e => e.textContent)
+        const entries = scryRenderedDOMComponentsWithClass(component, 'entry')
+        const [train, days] = entries.map(e => e.textContent)
 
         expect(entries.length).to.equal(2)
         expect(train).to.contain('Trainspotting')

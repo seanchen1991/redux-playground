@@ -1,8 +1,9 @@
 import React from 'react'
 import Winner from './Winner'
+import { connect } from 'react-redux'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-export default React.createClass({
+export const Results = React.createClass({
     mixins: [PureRenderMixin],
 
     getVotes(entry) {
@@ -10,6 +11,10 @@ export default React.createClass({
             return this.props.tally.get(entry)
         }
         return 0
+    },
+
+    getPair() {
+        return this.props.pair || {}
     },
 
     render() {
@@ -34,3 +39,13 @@ export default React.createClass({
             </div>
     }
 })
+
+function mapStateToProps(state) {
+    return {
+        pair: state.getIn(['vote', 'pair']),
+        tally: state.getIn(['vote', 'tally']),
+        winner: state.get('winner')
+    }
+}
+
+export const ResultsContainer = connect(mapStateToProps)(Results)
